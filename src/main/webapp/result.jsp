@@ -1,16 +1,18 @@
-<%@ page import = "java.util.*"%>
-<%! String message = null; %>
+
  <html>
   <body>
   <center>
   <H1>Result Page</H1>
   <H3>
-  <%String message = request.getParameter("message");
-  if (!message==null) {
-  %>
-  WELCOME!<br>
+  WELCOME!
+  <br>
   <%
-  out.print(message);
+  String mes = (String)request.getAttribute("message");
+  if (mes!=null) {
+  %>
+  <%=mes%>
+  <%
+  }
   %>
   </H3>
   </body>

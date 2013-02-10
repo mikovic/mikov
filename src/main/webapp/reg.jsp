@@ -1,14 +1,21 @@
-
-<html>
+ <html>
 <head>
 <title>Registration Page</title>
 </head>
 <body>
 <center>
 <br><h2>Registration Page</h2>
-<br>Please enter the user details
-<br>
-<br><FORM METHOD=POST ACTION=/hello>
+<br><h2>
+  <%
+  String mes = (String)request.getAttribute("message");
+   if (mes!=null) {
+   %>
+  <%=mes%>
+  <%
+  }
+  %>
+<br> Please enter the user details</h2>
+<br><FORM METHOD=POST ACTION=hello>
 <table>
 <tr>
  <td>Login:</td>
