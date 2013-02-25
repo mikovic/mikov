@@ -2,7 +2,7 @@
 
 <HTML>
 <HEAD>
-<TITLE>Welcome!</TITLE>
+<TITLE>Welcome to Cassiopeya</TITLE>
 </HEAD>
 <BODY>
 <TABLE>
@@ -12,11 +12,9 @@
 <TR>
 <TD><jsp:include page = "Menu.jsp" flush = "true"/></TD>
 <TD VALIGN = "TOP">
-<H2>WELCOME TO CASSIOPEYA!</H2>
-<P><c:out value = "!{message">
+<H2>WELCOME TO CASSIOPEYA</H2>
 </TD>
 </TR>
 </TABLE>
 </BODY>
 </HTML>
-

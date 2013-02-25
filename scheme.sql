@@ -3,7 +3,7 @@
     CREATE TABLE users
     (
         user_id INT NOT NULL AUTO_INCREMENT,
-        userLogin varchar(20),
+        user_login varchar(20),
         password varchar(20),
         email varchar(30),
         PRIMARY KEY (user_id)
@@ -15,21 +15,17 @@
          CONSTRAINT users_user_id_fk
          FOREIGN KEY (user_id)
          REFERENCES users (user_id),
+         topic_idea varchar(15),
          desc_idea varchar(30),
          create_date DATE,
          update_date DATE,
          close_date  DATE,
          budget  varchar(30)
       );
-      CREATE TABLE tag
+      CREATE TABLE categories
        (
-         tag_id INT NOT NULL AUTO_INCREMENT,
-         idea_id INT NOT NULL,
-         CONSTRAINT idea_idea_id_fk
-         FOREIGN KEY (idea_id)
-         REFERENCES idea (idea_id),
-         tag_name varchar(20),
-         PRIMARY KEY (tag_id)
+         category_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+         category varchar(20)
         );
        CREATE TABLE comment
        (

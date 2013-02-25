@@ -5,17 +5,52 @@
 <web-app>
   <display-name>Cassiopeya</display-name>
     <servlet>
-        <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>org.cassiopeya.servlet.HelloServlet</servlet-class>
+        <servlet-name>DefaultServlet</servlet-name>
+        <servlet-class>org.cassiopeya.servlet.ControllerServlet</servlet-class>
        <!--<init-param>-->
             <!--<param-name></param-name>-->
             <!--<param-value></param-value>-->
          <!--</init-param>-->
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>RegistrationServlet</servlet-name>
+        <servlet-class>org.cassiopeya.servlet.RegistrationServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>ResultLoginServlet</servlet-name>
+        <servlet-class>org.cassiopeya.servlet.ResultLogInServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>ResultSignInServlet</servlet-name>
+        <servlet-class>org.cassiopeya.servlet.ResultSignInServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCategories</servlet-name>
+        <servlet-class>org.cassiopeya.servlet.ViewCategoriesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>HelloServlet</servlet-name>
-        <url-pattern>/hello</url-pattern>
+        <servlet-name>DefaultServlet</servlet-name>
+        <url-pattern>/default</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>RegistrationServlet</servlet-name>
+        <url-pattern>/registration</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResultLoginServlet</servlet-name>
+        <url-pattern>/resultLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResultSignServlet</servlet-name>
+        <url-pattern>/resultSign</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCategoriesServlet</servlet-name>
+        <url-pattern>/viewCategories</url-pattern>
+    </servlet-mapping>
 </web-app>

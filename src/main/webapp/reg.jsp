@@ -1,3 +1,5 @@
+ <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+
  <html>
 <head>
 <title>Registration Page</title>
@@ -6,16 +8,11 @@
 <center>
 <br><h2>Registration Page</h2>
 <br><h2>
-  <%
-  String mes = (String)request.getAttribute("message");
-   if (mes!=null) {
-   %>
-  <%=mes%>
-  <%
-  }
-  %>
+ <c:if test = "${message!=null">
+ <c:out value = "${message}"/>
+ </c:if>
 <br> Please enter the user details</h2>
-<br><FORM METHOD=POST ACTION=hello>
+<p><FORM METHOD=POST ACTION=result>
 <table>
 <tr>
  <td>Login:</td>
@@ -25,12 +22,18 @@
  <td>Password:</td>
  <td><INPUT TYPE=PASSWORD NAME=password></td>
 </tr>
+<c:if test = "${action = signIn}"
+<tr>
+ <td>Re-Password:</td>
+ <td><INPUT TYPE=PASSWORD NAME=re_password></td>
+</tr>
+</c:if>
 <tr>
  <td>Email:</td>
  <td><INPUT TYPE=TEXT NAME=email></td>
 </tr>
 <tr>
- <td><INPUT TYPE=RESET VALUE=REFRESH </td>
+ <td><INPUT TYPE=RESET VALUE=RESET </td>
  <td><INPUT TYPE=SUBMIT VALUE=SUBMIT></td>
 </tr>
 </table>
