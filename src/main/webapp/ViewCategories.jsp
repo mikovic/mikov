@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 
 
@@ -13,9 +14,9 @@
 <TR>
 <TD><<jsp:include page = "Menu.jsp" flush = "true"/></TD>
 <TD VALIGN = "TOP">
-<c:if test="${categoryId!=null && !category.trim(),equals("")}">
+<c:if test="${request.categoryId!=null && !request.category.trim(),equals("")}">
 <TABLE>
-<c:forEach var="idea" items="${ideas}">
+<c:forEach var="idea" items="${request.ideas}">
  <TR>
   <TD><FONT FACE="Verdana" SIZE ="2"><B><c:out value = ${idea.topic}></B></FONT></TD>
   <TD><FONT FACE="Verdana" SIZE ="2"><B><c:out value = ${idea.user}</B></FONT></TD>

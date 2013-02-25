@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
  <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 
 <TABLE WIDTH = "740" CELLPADDING = "1"
@@ -8,7 +9,7 @@ HEIGHT = "75" CELLSPASING = "0"  border = "0">
  </TD>
  <TD ALIGN = "RIGHT" BGCOLOR = "F6F6F6">
  <c:choose>
-    <c:when test = "${session.getAttribute(user) == null}">
+    <c:when test = "${session.user == null}">
         <A HREF = /registration?action = logIn>Log In</A>
         &nbsp; &nbsp; &nbsp;
         <A HREF = /registration?action = signIn >Sign In</A>

@@ -1,3 +1,4 @@
+ <%@ page contentType="text/html;charset=UTF-8" language="java" %>
  <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 
  <html>
@@ -8,8 +9,8 @@
 <center>
 <br><h2>Registration Page</h2>
 <br><h2>
- <c:if test = "${message!=null">
- <c:out value = "${message}"/>
+ <c:if test = "${request.message!=null">
+ <c:out value = "${request.message}"/>
  </c:if>
 <br> Please enter the user details</h2>
 <p><FORM METHOD=POST ACTION=result>
@@ -22,7 +23,7 @@
  <td>Password:</td>
  <td><INPUT TYPE=PASSWORD NAME=password></td>
 </tr>
-<c:if test = "${action = signIn}"
+<c:if test = "${request.action = signIn}"
 <tr>
  <td>Re-Password:</td>
  <td><INPUT TYPE=PASSWORD NAME=re_password></td>

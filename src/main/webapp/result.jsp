@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 
 <HTML>
@@ -13,7 +14,7 @@
 <TD><jsp:include page = "Menu.jsp" flush = "true"/></TD>
 <TD VALIGN = "TOP">
 <H2>WELCOME TO CASSIOPEYA!</H2>
-<P><c:out value = "!{message">
+<P><c:out value = "!{request.message}">
 </TD>
 </TR>
 </TABLE>
