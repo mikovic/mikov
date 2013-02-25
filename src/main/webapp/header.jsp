@@ -15,6 +15,8 @@ HEIGHT = "75" CELLSPASING = "0"  border = "0">
      </c:when>
      <c:otherwise>
         <A HREF = >Me</A>
+     </c:otherwise>
+ </c:choose>
  </TD>
 </TR>
 </TABLE>
