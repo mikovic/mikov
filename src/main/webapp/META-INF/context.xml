@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context>
+    <Resource name="jdbc/pool" scope="Shareable"
+    auth="Container"
+    type="javax.sql.DataSource"
+    factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+    url="jdbc:mysql://localhost:3306/cassiopeya"
+    driverClassName="com.mysql.jdbc.Driver"
+    username="root"
+    password=""
+    maxActive="30" maxIdle="30" initialSize="30"  maxWait="10000" ></Resource>
+</Context>

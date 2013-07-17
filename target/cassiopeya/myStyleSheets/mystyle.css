@@ -1,0 +1,45 @@
+.browse_tools {
+    width: auto;
+    margin-bottom: 30px;
+    height: 40px;
+    background-color: rgb(238, 238, 238);
+    overflow: hidden;
+    border-radius: 4px 4px 4px 4px;
+}
+.browse_tools .pages {
+    width: 200px;
+    height: 20px;
+    text-align: right;
+    margin: 10px 10px 0px 0px;
+    overflow: hidden;
+    float: right;
+}
+.browse_tools .pages .prev_off, .browse_tools .pages .prev_off:hover {
+    background-position: 0px -40px !important;
+}
+.browse_tools .pages .prev {
+    display: block;
+    width: 20px;
+    height: 20px;
+    float: right;
+    margin-left: 8px;
+    margin-right: 6px;
+    background: url("//s3.amazonaws.com/wrapbootstrap/live/imgs/pagination.png") no-repeat scroll 0px -20px rgb(255, 255, 255);
+}
+.browse_tools .pages .next {
+    display: block;
+    width: 20px;
+    height: 20px;
+    float: right;
+    background: url("//s3.amazonaws.com/wrapbootstrap/live/imgs/pagination.png") no-repeat scroll -20px -20px rgb(255, 255, 255);
+}
+a {
+    color: rgb(0, 105, 214);
+    text-decoration: none;
+    line-height: inherit;
+    font-weight: inherit;
+}
+.browse_tools .pages .next_off, .browse_tools .pages .next_off:hover {
+    background-position: -20px -40px !important;
+}
+

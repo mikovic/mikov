@@ -1,85 +1,105 @@
 package org.cassiopeya.dao.mysql;
 
 import org.cassiopeya.dao.CategoryDao;
+import org.cassiopeya.dao.ConnectionDataBaseFactory;
 import org.cassiopeya.dto.Category;
-import org.cassiopeya.dto.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Locale;
 import java.util.Map;
 
 
 public class MysqlCategoryDao implements CategoryDao {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MysqlCategoryDao.class);
+
     @Override
-    public Map categories() {
-        Connection con =
-                null;
-        Statement s = null;
-        ResultSet rs = null;
-        HashMap categories = new HashMap();
+    public Map getCategories() {
+        LOGGER.debug("getCategories debug");
+        Map<String, String> categories = new HashMap();
+           ResultSet rs = null;
+           Statement s = null;
+           Connection con = null;
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cassiopeya", "root", "");
+            con = ConnectionDataBaseFactory.getConnection();
             s = con.createStatement();
-            String sql = "SELECT category_Id, category FROM categories " +" ";
+            String sql = "SELECT category_Id, category_name FROM categories " +" ";
             rs = s.executeQuery(sql);
             while (rs.next()) {
                 categories.put(rs.getString(1), rs.getString(2));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                rs.close();
-                s.close();
-                con.close();
+        }
+        catch (SQLException e) {
+            LOGGER.error("Get Category exception", e );
+        }
+        finally {
+          try {
+            if (rs!=null )rs.close();
+            if (s!=null)s.close();
+            if (con!=null)con.close();
+          }catch (SQLException e){
+            LOGGER.error("SQLException", e);
+          }
+        }
 
-            }   catch (Exception e) {
-                e.printStackTrace();
-            }
-    }
         return categories;
- }
-    public Category createCategory(String category) {
-        Connection con =
-                null;
-        Statement s = null;
-        ResultSet rs = null;
+    }
+
+
+    public Category createCategory(String categoryName) {
+
+           Category category = null;
+
 
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cassiopeya", "root", "");
-            s = con.createStatement();
+            Connection con = ConnectionDataBaseFactory.getConnection();
+            Statement s = con.createStatement();
             String sql = "INSERT INTO categories"+
-                    " (category)" +
+                    " (category_name)" +
                     " VALUES" +
-                    "('" + category + "')";
+                    "('" + categoryName + "')";
             int i = s.executeUpdate(sql);
             if (i==1){
                 sql = "SELECT category_id FROM categories " +
-                        "WHERE category ='" + category + "'";
-                rs = s.executeQuery(sql);
+                        "WHERE category_name ='" + categoryName + "'";
+                ResultSet rs = s.executeQuery(sql);
                 if (rs.next()) {
                     int categoryId = rs.getInt("category_id");
-                    return new Category(categoryId, category);
-                }else {
-                    return null;
+                    category = new Category(categoryId, categoryName);
                 }
-            }
-    }   catch (SQLException e) {
-            e.printStackTrace();
-        }  finally {
-            try {
                 rs.close();
                 s.close();
                 con.close();
-
-            }   catch (Exception e) {
-                e.printStackTrace();
-            }
-
+                                  }
+    }   catch (SQLException e) {
+            e.printStackTrace();
         }
-        return null;
+         return category;
  }
 
+      public Category getCategory(int categoryId) {
+
+          Category category = null;
+
+
+          try {
+              Connection con = ConnectionDataBaseFactory.getConnection();
+              Statement s = con.createStatement();
+              String sql = "SELECT category_name FROM categories " +
+                      "WHERE category_id ='" + categoryId + "'";
+              ResultSet rs = s.executeQuery(sql);
+              if (rs.next()) {
+                  String categoryName = rs.getString("category_name");
+                  category = new Category(categoryId, categoryName);
+              }
+              rs.close();
+              s.close();
+              con.close();
+              }  catch (SQLException e) {
+              e.printStackTrace();
+          }
+
+          return category;
+      }
 }

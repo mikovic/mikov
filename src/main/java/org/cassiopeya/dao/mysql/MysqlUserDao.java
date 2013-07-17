@@ -1,5 +1,6 @@
 package org.cassiopeya.dao.mysql;
 
+import org.cassiopeya.dao.ConnectionDataBaseFactory;
 import org.cassiopeya.dao.UserDao;
 import org.cassiopeya.dto.User;
 
@@ -10,44 +11,44 @@ public class MysqlUserDao implements UserDao {
 
     public boolean isUserByLogin (String login) {
 
+        boolean isUserLogin = false;
         Connection con = null;
         Statement s = null;
         ResultSet rs = null;
-        try { con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cassiopeya", "root", "") ;
-              s = con.createStatement();
-            String sql = "SELECT user_login FROM users " +
+        try {
+            con = ConnectionDataBaseFactory.getConnection();
+            s = con.createStatement();
+            String sql = "SELECT * FROM users " +
                     "WHERE user_login ='" + login + "'";
-              rs = s.executeQuery(sql);
+             rs = s.executeQuery(sql);
 
             if (rs.next()) {
-                return true;
-            } else return false;
-
+                isUserLogin = true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        }  finally {
             try {
-                rs.close();
-                s.close();
-                con.close();
-
-            }   catch (Exception e) {
-                e.printStackTrace();
+                if (rs!=null )rs.close();
+                if (s!=null)s.close();
+                if (con!=null)con.close();
+            }catch (SQLException e){
             }
         }
 
-            return false;
+        return isUserLogin;
     }
 
 
     public User createUser(String login, String password, String email) {
 
-        Connection con = null;
+         User user = null;
+         Connection con = null;
         Statement s = null;
         ResultSet rs = null;
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cassiopeya", "root", "");
-            s = con.createStatement();
+            con = ConnectionDataBaseFactory.getConnection();
+             s = con.createStatement();
             String sql = "INSERT INTO users"+
                     " (user_login, password, email)" +
                     " VALUES" +
@@ -59,34 +60,36 @@ public class MysqlUserDao implements UserDao {
                 sql = "SELECT user_id FROM users " +
                         "WHERE user_login ='" + login + "'" +
                         " AND password ='" + password + "'";
-                rs = s.executeQuery(sql);
+                 rs = s.executeQuery(sql);
                 if (rs.next()) {
                     int userId = rs.getInt("user_id");
-                    return new User(userId, login, password, email);
+                    user = new User(userId, login, password, email);
                 }
+
             }
+
 
         } catch (SQLException e) {
             e.printStackTrace();
         }  finally {
             try {
-                rs.close();
-                s.close();
-                con.close();
-
-            }   catch (Exception e) {
-                e.printStackTrace();
+                if (rs!=null )rs.close();
+                if (s!=null)s.close();
+                if (con!=null)con.close();
+            }catch (SQLException e){
             }
-
         }
-        return null;
+
+
+        return user;
     }
     public User regUser(String login, String password){
-        Connection con = null;
+       User user = null;
+       ResultSet rs = null;
         Statement s = null;
-        ResultSet rs = null;
+        Connection con = null;
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cassiopeya", "root", "");
+            con = ConnectionDataBaseFactory.getConnection();
             s =  con.createStatement();
             String sql = "SELECT * FROM users " +
                     "WHERE user_login ='" + login + "'" +
@@ -95,22 +98,50 @@ public class MysqlUserDao implements UserDao {
             if (rs.next()) {
                 int userId = rs.getInt("user_id");
                 String email = rs.getString("email");
-                User user = new User(userId,login, password, email );
-                return user;
-            }  else  return null;
+                user = new User(userId,login, password, email );
+            }
+
         }    catch (SQLException e) {
                 e.printStackTrace();
-            }  finally {
-                try {
-                    rs.close();
-                    s.close();
-                    con.close();
+            } finally {
+            try {
+                if (rs!=null )rs.close();
+                if (s!=null)s.close();
+                if (con!=null)con.close();
+            }catch (SQLException e){
+            }
+        }
 
-                }   catch (Exception e) {
-                    e.printStackTrace();
-                }
-     }
+        return user;
+    }
+    public String getUserLogin (int userId) {
 
-        return null;
+        String login = null;
+        ResultSet rs = null;
+        Connection con = null;
+        Statement s = null;
+        try {
+            con = ConnectionDataBaseFactory.getConnection();
+            s = con.createStatement();
+            String sql = "SELECT user_login FROM users " +
+                    "WHERE user_Id ='" + userId + "'";
+            rs = s.executeQuery(sql);
+
+            if (rs.next()) {
+                login = rs.getString("user_login");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs!=null )rs.close();
+                if (s!=null)s.close();
+                if (con!=null)con.close();
+            }catch (SQLException e){
+            }
+        }
+
+        return login;
     }
 }

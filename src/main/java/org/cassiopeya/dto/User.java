@@ -1,12 +1,6 @@
 package org.cassiopeya.dto;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Masha
- * Date: 13.02.13
- * Time: 9:24
- * To change this template use File | Settings | File Templates.
- */
+
 public class User {
     private int userId;
     private String userLogin;

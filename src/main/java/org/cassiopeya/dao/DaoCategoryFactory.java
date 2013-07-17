@@ -2,15 +2,17 @@ package org.cassiopeya.dao;
 
 import org.cassiopeya.dao.mysql.MysqlCategoryDao;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Masha
- * Date: 18.02.13
- * Time: 16:10
- * To change this template use File | Settings | File Templates.
- */
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+
 public class DaoCategoryFactory {
     public static CategoryDao getCategoryDao() {
-        return new MysqlCategoryDao();
+                return new MysqlCategoryDao();
  }
 }

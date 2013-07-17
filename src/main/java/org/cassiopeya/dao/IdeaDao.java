@@ -3,16 +3,16 @@ package org.cassiopeya.dao;
 import org.cassiopeya.dto.Idea;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Masha
- * Date: 18.02.13
- * Time: 19:02
- * To change this template use File | Settings | File Templates.
- */
 public interface IdeaDao {
-    Idea createIdea ( int userId, String categoryId, String topicIdea, String descIdea, String createDate,
-                      String updateDate, String closeDate, String budget);
-     ArrayList getIdeasInCategory(String categoryId);
+    Idea createIdea ( int userId, int categoryId, String topicIdea, String descIdea, Date createDate,
+                       int budget);
+     ArrayList getIdeasInCategory(int categoryId, int page, int countIdeasOnPage);
+     ArrayList getIdeasInUserId(int userId);
+     Idea getIdeaInId(int ideaId);
+     int getPagesInCategory(int category);
+    Idea getInfoInvestInIdea(int ideaId);
+    Idea getIdeaUserOnPage(int userId, int page);
+    int getCountIdeasUser(int userId);
 }

@@ -1,28 +1,46 @@
 package org.cassiopeya.dto;
 
+import java.util.Date;
+
 public class Idea {
-    int ideaId;
-    int userId;
-    String category;
+    private int ideaId;
+    private int userId;
+    private int categoryId;
+    private String topicIdea;
+    private String descIdea;
+    private Date createDate;
+    private Date updateDate;
+    private Date closeDate;
+    private int budget;
+    private String userLogin;
+    private int sumInvestInIdea;
+    private int maxInvestInIdea;
+    private int avgInvestInIdea;
 
-    public String getCategory() {
-        return category;
+    public int getSumInvestInIdea() {
+        return sumInvestInIdea;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setSumInvestInIdea(int sumInvestInIdea) {
+        this.sumInvestInIdea = sumInvestInIdea;
     }
-    String categoryId;
-    String topicIdea;
-    String descIdea;
 
+    public int getMaxInvestInIdea() {
 
+        return maxInvestInIdea;
+    }
 
-    String createDate;
-    String updateDate;
-    String closeDate;
-    String budget;
+    public void setMaxInvestInIdea(int maxInvestInIdea) {
+        this.maxInvestInIdea = maxInvestInIdea;
+    }
 
+    public int getAvgInvestInIdea() {
+        return avgInvestInIdea;
+    }
+
+    public void setAvgInvestInIdea(int avgInvestInIdea) {
+        this.avgInvestInIdea = avgInvestInIdea;
+    }
 
     public int getIdeaId() {
         return ideaId;
@@ -39,11 +57,12 @@ public class Idea {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-    public String getCategoryId() {
+
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
     public String getTopicIdea() {
@@ -62,54 +81,54 @@ public class Idea {
         this.descIdea = descIdea;
     }
 
-    public String getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
-
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
-    public String getUpdateDate() {
+    public Date getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(String updateDate) {
+    public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
 
-    public String getCloseDate() {
+    public Date getCloseDate() {
         return closeDate;
     }
 
-    public void setCloseDate(String closeDate) {
+    public void setCloseDate(Date closeDate) {
         this.closeDate = closeDate;
     }
 
-    public String getBudget() {
+    public int getBudget() {
         return budget;
     }
 
-    public void setBudget(String budget) {
+    public void setBudget(int budget) {
         this.budget = budget;
     }
-
+    public String getUserLogin (){
+        return userLogin;
+    }
+    public void setUserLogin(String userLogin){
+        this.userLogin = userLogin;
+    }
     public Idea() {
     }
 
-    public Idea(int ideaId, int userId, String categoryId,String topicIdea, String descIdea, String createDate, String updateDate,
-                String closeDate, String budget) {
+    public Idea(int ideaId, int userId, int categoryId,String topicIdea, String descIdea,
+                Date createDate, int budget) {
         this.ideaId = ideaId;
         this.userId = userId;
         this.categoryId = categoryId;
         this.topicIdea = topicIdea;
         this.descIdea = descIdea;
         this.createDate = createDate;
-
-        this.updateDate = updateDate;
-        this.closeDate = closeDate;
         this.budget = budget;
-
 
     }
 }
