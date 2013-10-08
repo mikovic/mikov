@@ -24,8 +24,8 @@
         <div class="span9">
             <div class="row-fluid" >
                 <div class="media">
-                    <ul class="pull-left"><img src='DownLoadServlet?imgId=<c:out value="${requestScope.firstImgId}"/>&load=ideaV' style="width: 300px;height: 200px;" alt="You can add foto!"></ul>
-                    <div class="media-body">
+                    <ul class="pull-left"><img src='DownLoadServlet?imgId=<c:out value="${requestScope.firstImgId}"/>&load=ideaV' style="width: auto;height: 200px;" alt="You can add foto!"></ul>
+                    <div class="media-body pull-right">
                         <h4 class="media-heading"><c:out value="${requestScope.idea.topicIdea}"/></h4>
                         <p><c:out value="${requestScope.idea.userLogin}"/></p>
                         <p><fmt:formatDate pattern="yyyy-MM-dd"

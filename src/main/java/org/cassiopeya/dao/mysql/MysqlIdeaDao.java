@@ -349,4 +349,45 @@ public class MysqlIdeaDao implements IdeaDao {
         }
         return countIdeasUser;  //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    @Override
+    public Idea getEditTextIdea(int ideaId, int categoryId, String topicIdea, String descIdea, int budget) {
+        Idea ideaEdit = null;
+        Connection con = null;
+        PreparedStatement pst = null;
+
+        try {
+            con = ConnectionDataBaseFactory.getConnection();
+            String query = "UPDATE ideas SET category_id=?,topic_idea=?,desc_idea=?,budget=? WHERE idea_id="+ideaId;
+            pst = con.prepareStatement(query);
+            pst.setInt(1, categoryId);
+            pst.setString(2, topicIdea);
+            pst.setString(3, descIdea);
+            pst.setInt(4, budget);
+            int i = pst.executeUpdate();
+            if (i==1) {
+                ideaEdit = new Idea();
+                ideaEdit.setIdeaId(ideaId);
+                ideaEdit.setCategoryId(categoryId);
+                ideaEdit.setTopicIdea(topicIdea);
+                ideaEdit.setDescIdea(descIdea);
+                ideaEdit.setBudget(budget);
+
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return ideaEdit;
+    }
 }

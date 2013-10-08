@@ -54,7 +54,7 @@
                                 <div class="span9">
                                     <div class="thumbnail">
                                         <div class="caption">
-                                            <img src='DownLoadServlet?imgId=<c:out value="${requestScope.firstImgId}"/>&load=myProfile'  style="width: 300px;height: 200px;" alt="You can add foto!">
+                                            <img src='DownLoadServlet?imgId=<c:out value="${requestScope.firstImgId}"/>&load=myProfile'  style="width: auto;height: 200px;" alt="You can add foto!">
                                         </div>
                                     </div>
                                     <h4><c:out value = "${requestScope.ideaNew.topicIdea}"/></h4>
@@ -71,7 +71,7 @@
                     <div class="row-fluid">
                         <div class="span9">
                             <c:forEach var="imgId" items="${requestScope.colImgId}">
-                                <img src='DownLoadServlet?imgId=<c:out value="${imgId}"/>&load=myProfile' style="width: 300px;height: 200px;" alt="">
+                                <img src='DownLoadServlet?imgId=<c:out value="${imgId}"/>&load=myProfile' style="width: auto;height: 200px;" alt="">
                             </c:forEach>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                     <div class="span9">
                         <div class="media">
                             <a class="thumbnail pull-left">
-                                <img class="media-object" src='DownLoadServlet?imgId=<c:out value="${requestScope.firstImgId}"/>&load=myProfile' style="width: 300px;height: 200px;" alt="300x200 You can add foto">
+                                <img class="media-object" src='DownLoadServlet?imgId=<c:out value="${requestScope.firstImgId}"/>&load=myProfile' style="width: auto;height: 200px;" alt="300x200 You can add foto">
                             </a>
                             <div class="media-body pull-right">
                                 <h3 class="media-heading"><c:out value = "${requestScope.ideaUserOnPage.topicIdea}"/></h3>
@@ -114,7 +114,7 @@
                             <c:forEach var="imgId" items="${requestScope.colImgId}">
                                 <li>
                                     <div class="thumbnail">
-                                        <img src='DownLoadServlet?imgId=<c:out value="${imgId}"/>&load=myProfile' style="width: 300px;height: 200px;" alt="">
+                                        <img src='DownLoadServlet?imgId=<c:out value="${imgId}"/>&load=myProfile' style="width: auto;height: 200px;" alt="">
                                     </div>
                                 </li>
                             </c:forEach>
@@ -123,7 +123,7 @@
                 </c:if>
                 <div class="row-fluid">
                     <div class="span3 pull-right">
-                        <a href="EditServlet?ideaId=<c:out value="${requestScope.ideaUserOnPage.ideaId}"/>" class="btn-primary btn-large">EDIT</a>
+                        <a href="EditServlet?ideaId=<c:out value="${requestScope.ideaUserOnPage.ideaId}"/>&page=<c:out value="${requestScope.page}"/>" class="btn-primary btn-large">EDIT</a>
                     </div>
                 </div>
                 <div class="row-fluid">

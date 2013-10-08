@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public interface ImgDao {
-    int addImgToIdea(int userId, String fileName, String filePath) throws SQLException;
+    int addImgToIdea(int ideaId, int userId, String pathImg) throws SQLException;
     byte[] getImgFromIdea(int imgId);
     LinkedList<Integer> createIdImgUser(int ideaId,int userId ,ArrayList<String> colRelativePathImg);
     String getPathImgInId (int imgId);
     LinkedList<Integer> getIdImgUser(int ideaId);
     boolean isPathImg(String pathImg);
+    boolean deleteImg(int imgId);
+    public int getCountImgIdea(int ideaId);
 }

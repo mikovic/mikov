@@ -18,7 +18,7 @@
     <script src="/thirdpartyapplicationjs/ractoon/textcounter.jqu"></script>
     <script src="/myfilejs/myfunction.js"></script>
     <script src="/jquery.addInputFile.js"></script>
-     <script src="/thirdpartyapplicationjs/jquery.MultiFile.js."></script>
+    <script src="/thirdpartyapplicationjs/jquery.MultiFile.js."></script>
     <script>
         $("input:file").on("change", addInputFile());
     </script>
@@ -45,6 +45,7 @@
             }});
     </script>
 
+
     <title>My Profile</title>
 </head>
 <body>
@@ -57,6 +58,9 @@
         </div>
         <div class="row-fluid">
             <div class="span12">
+                <p>
+                    <h3> <c:out value = "${requestScope.msg}"/></h3>
+                </p>
                 <form class="form-horizontal" action="StartProject" method="post" enctype="multipart/form-data"  onsubmit="trimAll(this.descIdea.value)">
                     <input type="hidden" name="userId" value='<c:out value="${sessionScope.user.userId}"/>'>
                     <div class="control-group">
@@ -96,7 +100,7 @@
                         <label class="control-label">Files to upload</label>
                         <div class="controls">
                             <div id="files">
-                            <input type="file" class="multi" type='file' onchange="addInputF()" style="display: block" name="uploadFile" id="MultiFile"  accept="image/*,image/jpeg" >
+                                <input type="file" class="multi" onchange="addInputF()" style="display: block" name="uploadFile" id="MultiFile"  accept="image/*,image/jpeg" >
                             </div>
                             <div id="mes"></div>
                             <div id="imgs"></div>

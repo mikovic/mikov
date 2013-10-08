@@ -64,11 +64,17 @@
     <servlet>
         <servlet-name>DownLoadServlet</servlet-name>
         <servlet-class>org.cassiopeya.servlet.DownLoadServlet</servlet-class>
-        <init-param>
-            <param-name>myName</param-name>
-            <param-value>value</param-value>
-        </init-param>
+
     </servlet>
+    <servlet>
+        <servlet-name>EditPictureServlet</servlet-name>
+        <servlet-class>org.cassiopeya.servlet.EditPictureServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownLoadEditPicture</servlet-name>
+        <servlet-class>org.cassiopeya.servlet.DownLoadEditPictureServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>DefaultServlet</servlet-name>
         <url-pattern>/</url-pattern>
@@ -116,7 +122,10 @@
         <servlet-name>EditServlet</servlet-name>
         <url-pattern>/EditServlet</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>EditPictureServlet</servlet-name>
+        <url-pattern>/EditPictureServlet</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.js</url-pattern>
@@ -141,6 +150,15 @@
         <servlet-name>DownLoadServlet</servlet-name>
         <url-pattern>/DownLoadServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DefaultServlet</servlet-name>
+        <url-pattern>/DefaultServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownLoadEditPicture</servlet-name>
+        <url-pattern>/DownLoadEditPicture</url-pattern>
+    </servlet-mapping>
+
 
     <resource-ref>
         <description>Pool for my DataBase cassiopeya</description>

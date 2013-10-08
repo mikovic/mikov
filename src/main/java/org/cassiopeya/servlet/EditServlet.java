@@ -1,5 +1,6 @@
 package org.cassiopeya.servlet;
 
+import com.google.gson.Gson;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -7,6 +8,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.cassiopeya.dao.*;
 import org.cassiopeya.dto.Idea;
 import org.cassiopeya.dto.User;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,11 +30,14 @@ public class EditServlet extends HttpServlet {
     private static final int MEMORY_THRESHOLD   = 1024 * 1024 * 5;  // 5MB
     private static final int MAX_FILE_SIZE      = 1024 * 1024 * 40; // 40MB
     private static final int MAX_REQUEST_SIZE   = 1024 * 1024 * 50; // 50MB
+    private static int MAX_QUANT_IMG = 3;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         IdeaDao ideaDao = DaoIdeaFactory.getIdeaDao();
         int ideaId = Integer.parseInt(request.getParameter("ideaId"));
+        int page = Integer.parseInt(request.getParameter("page"));
+        request.setAttribute("page", page);
         Idea ideaEdit = ideaDao.getIdeaInId(ideaId);
         request.setAttribute("ideaEdit", ideaEdit);
         CategoryDao categoryDao = DaoCategoryFactory.getCategoryDao();
@@ -41,14 +46,31 @@ public class EditServlet extends HttpServlet {
         ImgDao imgDao = DaoImgFactory.getImgDao();
         LinkedList<Integer> idImgUser= imgDao.getIdImgUser(ideaId);
         request.setAttribute("idImgUser", idImgUser);
+        int countImgIdea = imgDao.getCountImgIdea(ideaId);
+        int countImgToAdd = MAX_QUANT_IMG - countImgIdea;
+
+        request.setAttribute("countImgToAdd",countImgToAdd);
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/Edit.jsp");
         rd.forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        IdeaDao ideaDao = DaoIdeaFactory.getIdeaDao();
+        String editText = request.getParameter("editText");
+        if ("true".equals(editText)){
+            int ideaId = Integer.parseInt(request.getParameter("ideaId"));
+            int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+            String topic = request.getParameter("topicIdea");
+            String descIdea = request.getParameter("descIdea");
+            int budget = Integer.parseInt(request.getParameter("budget"));
+            Idea ideaEdit = ideaDao.getEditTextIdea(ideaId, categoryId, topic, descIdea, budget);
+            Gson gson = new Gson();
+            String json = gson.toJson(ideaEdit);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }
 
-
-
-        // configures upload settings
+  /*      // configures upload settings
         DiskFileItemFactory factory = new DiskFileItemFactory();
         // sets memory threshold - beyond which files are stored in disk
         factory.setSizeThreshold(MEMORY_THRESHOLD);
@@ -150,5 +172,6 @@ public class EditServlet extends HttpServlet {
 
 
 
+    }*/
     }
 }

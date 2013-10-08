@@ -88,21 +88,21 @@ function addInput(){
     newImg.src = route;
     newImg.style = "width:100px;height:50px;";
     imgs.appendChilde(newImg);
-        var newA =  document.createElement("a");
-        newA.innerHTML ='Add file?';
-        form.insertBefore(newA,imgs);
-        newA.onclick = function(){
-            if ( elementsInput[cunt-1].style.display=="block"){
-                elementsInput[cunt-1].style.display="none"
-            }
-            name=name+cunt;
-            var container=document.createElement("div");
-            container.innerHTML='<input type="file" class="multi" style="display: block" onchange="addInput()">'
-            var newInputFile=container.firstChild
-            newInputFile.name=name
-            files.appendChild(newInputFile);
-            form.removeChild(newA);
+    var newA =  document.createElement("a");
+    newA.innerHTML ='Add file?';
+    form.insertBefore(newA,imgs);
+    newA.onclick = function(){
+        if ( elementsInput[cunt-1].style.display=="block"){
+            elementsInput[cunt-1].style.display="none"
         }
+        name=name+cunt;
+        var container=document.createElement("div");
+        container.innerHTML='<input type="file" class="multi" style="display: block" onchange="addInput()">'
+        var newInputFile=container.firstChild
+        newInputFile.name=name
+        files.appendChild(newInputFile);
+        form.removeChild(newA);
+    }
 
 }
 function addInputF(){
@@ -115,11 +115,11 @@ function addInputF(){
     var boolean = false;
     if(cunt>1){
         for (var i = 0;i<cunt-1;i++) {
-           if(route==elementsInput[i].value){
-               boolean= true;
-               elementsInput[cunt-1].value = null;
-               return;
-           }
+            if(route==elementsInput[i].value){
+                boolean= true;
+                elementsInput[cunt-1].value = null;
+                return;
+            }
 
         }
     }
@@ -179,6 +179,148 @@ function removeFile(){
         newInputFile.name=name;
         files.appendChild(newInputFile);
 
+    }
+}
+
+function setReadOnlyText() {
+    var topic = document.getElementById('topic');
+    var textarea = document.getElementById('limitField');
+    var budget = document.getElementById('budget');
+    topic.readOnly = true;
+    textarea.readOnly = true;
+    budget.readOnly = true;
+    var btn = document.getElementById('btn');
+    var input = btn.getElementsByTagName('input')[0];
+    input.style.display="none"
+    var button1 = document.createElement('input');
+    var button2 = document.createElement('input');
+    button1.className = "btn btn-primary btn-large";
+    button1.value ="CONTINUE?";
+    button1.type = "submit"
+    button2.className = "btn btn-primary btn-large";
+    button2.value ="RETURN?";
+    var span1 = document.createElement('span');
+    var span2 = document.createElement('span');
+    span2.style = "margin-left: 5px;"
+    span1.appendChild(button1);
+    span2.appendChild(button2);
+    btn.appendChild(span1);
+    btn.appendChild(span2);
+    button2.onclick = function(){
+        topic.readOnly = false;
+        textarea.readOnly = false;
+        budget.readOnly = false;
+        btn.removeChild(span1);
+        btn.removeChild(span2);
+        input.style.display="block";
+    }
+    /*  function setReadOnlyText() {
+     var topic = document.getElementById('topic');
+     var textarea = document.getElementById('limitField');
+     var budget = document.getElementById('budget');
+     topic.readOnly = true;
+     textarea.readOnly = true;
+     budget.readOnly = true;
+     var btn = document.getElementById('btn');
+     var button = btn.getElementsByTagName('input')[0];
+     var button1 = btn.getElementsByTagName('input')[1];
+     var button2 = btn.getElementsByTagName('input')[2];
+     button.style.display="none";
+     button1.style.display="block";
+     button2.style.display="block";
+
+     }
+     function cancelSetReadOnlyText() {
+     var topic = document.getElementById('topic');
+     var textarea = document.getElementById('limitField');
+     var budget = document.getElementById('budget');
+     var btn = document.getElementById('btn');
+     var button = btn.getElementsByTagName('input')[0];
+     var button1 = btn.getElementsByTagName('input')[1];
+     var button2 = btn.getElementsByTagName('input')[2];
+     topic.readOnly = false;
+     textarea.readOnly = false;
+     budget.readOnly = false;
+     button.style.display="block";
+     button1.style.display="none";
+     button2.style.display="none";
+     }  */
+    function getXMLHttpRequest() {
+        var xmlHttpReq = false;
+        // to create XMLHttpRequest object in non-Microsoft browsers
+        if (window.XMLHttpRequest) {
+            xmlHttpReq = new XMLHttpRequest();
+        } else if (window.ActiveXObject) {
+            try {
+                // to create XMLHttpRequest object in later versions
+                // of Internet Explorer
+                xmlHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch (exp1) {
+                try {
+                    // to create XMLHttpRequest object in older versions
+                    // of Internet Explorer
+                    xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+                } catch (exp2) {
+                    xmlHttpReq = false;
+                }
+            }
+        }
+        return xmlHttpReq;
+    }
+    /*
+     * AJAX call starts with this function
+     */
+    function makeRequest() {
+        var xmlHttpRequest = getXMLHttpRequest();
+        var params = 'editText=' + encodeURIComponent(editText) +
+            '&ideaId=' + encodeURIComponent(ideaId )+
+            '&categoryId=' + encodeURIComponent(categoryId) +
+            '&topicIdea=' + encodeURIComponent(topicIdea) +
+            '&descIdea=' + encodeURIComponent(descIdea) +
+            '&budget=' + encodeURIComponent(budget);
+        xmlHttpRequest.onreadystatechange = getReadyStateHandler(xmlHttpRequest);
+        xmlHttpRequest.open("POST", "EditServlet", true);
+        xmlHttpRequest.setRequestHeader("Content-Type",
+            "application/x-www-form-urlencoded");
+        xmlHttpRequest.send(params);
+    }
+
+    /*
+     * Returns a function that waits for the state change in XMLHttpRequest
+     */
+    function getReadyStateHandler(xmlHttpRequest) {
+
+
+        return function() {
+            if (xmlHttpRequest.readyState == 4) {
+                if (xmlHttpRequest.status == 200) {
+
+
+                  var jsonExpression =  xmlHttpRequest.responseText;
+                    var ideaEdit = JSON.parse(jsonExpression);
+
+                /*    var ideaEdit = eval("("+jsonExpression+")");   */
+                 /*   document.getElementById('ideaId').value = ideaEdit.ideaId;
+                    document.getElementById('topicIdea').value = ideaEdit.topicIdea;
+                    document.getElementById('limitField').value = ideaEdit.descIdea;
+                    document.getElementById('categoryId').value = ideaEdit.categoryId;
+                    document.getElementById(' budget').value = ideaEdit.budget;
+                    var btn = document.getElementById('btn');
+                    var input = btn.getElementsByTagName('input')[0];
+                    var span1 = btn.getElementsByTagName('span')[0];
+                    var span2 = btn.getElementsByTagName('span')[1];
+                    btn.removeChild(span1);
+                    btn.removeChild(span2);
+                    input.style.display="block"; */
+
+                   alert(ideaEdit);
+
+
+                } else {
+                    alert("HTTP error " + xmlHttpRequest.status + ": " + xmlHttpRequest.statusText);
+                }
+            }
+        };
     }
 }
 

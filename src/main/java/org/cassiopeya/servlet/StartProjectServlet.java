@@ -19,13 +19,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Masha
- * Date: 19.05.13
- * Time: 20:40
- * To change this template use File | Settings | File Templates.
- */
+
 public class StartProjectServlet extends HttpServlet {
     private static final int MEMORY_THRESHOLD   = 1024 * 1024 * 3;  // 3MB
     private static final int MAX_FILE_SIZE      = 1024 * 1024 * 40; // 40MB
@@ -72,7 +66,7 @@ public class StartProjectServlet extends HttpServlet {
 
         // sets maximum size of request (include file + form data)
         upload.setSizeMax(MAX_REQUEST_SIZE);
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession();
         User user = (User)session.getAttribute("user");
         String userLogin =user.getUserLogin();
         String uploadPathUser = ROOT + File.separator +userLogin;
@@ -102,6 +96,7 @@ public class StartProjectServlet extends HttpServlet {
 
                     if (!item.isFormField()) {
                         fileName = item.getName();
+
                         if (fileName.lastIndexOf("\\") >= 0) {
                             fileName = fileName.substring(fileName
                                     .lastIndexOf("\\"));
@@ -109,6 +104,7 @@ public class StartProjectServlet extends HttpServlet {
                             fileName = fileName.substring(fileName
                                     .lastIndexOf("\\") + 1);
                         }
+                        if (fileName.equals("")) continue;
                         relativePathImg = userLogin + File.separator + fileName;
                         if(!imgDao.isPathImg(relativePathImg)){
                             uploadFile = new File(ROOT + File.separator + relativePathImg);
@@ -151,6 +147,13 @@ public class StartProjectServlet extends HttpServlet {
                 request.setAttribute("colImgId", colImgId);
             }
 
+        }
+        if (ideaNew==null) {
+            String msg ="At you it didn't turn out to create the project. Try once again!";
+            request.setAttribute("msg", msg);
+
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/StartProject.jsp");
+            rd.forward(request, response);
         }
         String msg ="Our congratulations! You just backed new project";
         ArrayList ideasUser = ideaDao.getIdeasInUserId(userId);

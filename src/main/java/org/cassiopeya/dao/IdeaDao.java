@@ -15,4 +15,5 @@ public interface IdeaDao {
     Idea getInfoInvestInIdea(int ideaId);
     Idea getIdeaUserOnPage(int userId, int page);
     int getCountIdeasUser(int userId);
+    Idea getEditTextIdea(int ideaId, int categoryId, String topicIdea, String descIdea, int budget );
 }
